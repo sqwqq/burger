@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BurgerNation</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script>
+    // 1. Создаем базовую структуру документа
+    const doc = document.implementation.createHTMLDocument("BurgerNation");
+    const html = doc.documentElement;
+    html.lang = "en";
+
+    // 2. Создаем <head>
+    const head = doc.createElement("head");
+    const metaCharset = doc.createElement("meta");
+    metaCharset.charset = "UTF-8";
+    const metaViewport = doc.createElement("meta");
+    metaViewport.name = "viewport";
+    metaViewport.content = "width=device-width, initial-scale=1.0";
+    const title = doc.createElement("title");
+    title.textContent = "BurgerNation - Home";
+    const linkCss = doc.createElement("link");
+    linkCss.rel = "stylesheet";
+    linkCss.href = "css/styles.css";
+    const linkFonts = doc.createElement("link");
+    linkFonts.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap";
+    linkFonts.rel = "stylesheet";
+
+    head.append(metaCharset, metaViewport, title, linkCss, linkFonts);
+
+    // 3. Создаем <body>
+    const body = doc.createElement("body");
+
+    // Stripes div
+    const stripes = doc.createElement("div");
+    stripes.className = "stripes";
+
+    // Header
+    const header = doc.createElement("header");
+    header.className = "header header-home";
+
+    const nav = doc.createElement("nav");
+    nav.className = "navbar";
+
+    const logo = doc.createElement("a");
+    logo.href = "index.html";
+    logo.className = "logo";
+    logo.innerHTML = "&#9776; BurgerNation";
+
+    const navLinks = doc.createElement("ul");
+    navLinks.className = "nav-links";
+
+    const navItems = [
+      { text: "Home", href: "index.html", active: true },
+      { text: "Our Menu", href: "menu.html" },
+      { text: "Offers", href: "offers.html" },
+      { text: "About", href: "about.html" },
+      { text: "Franchise", href: "franchise.html" },
+      { text: "Contact", href: "contact.html" }
+    ];
+
+    navItems.forEach(item => {
+      const li = doc.createElement("li");
+      const a = doc.createElement("a");
+      a.href = item.href;
+      a.textContent = item.text;
+      if (item.active) a.className = "active";
+      li.append(a);
+      navLinks.append(li);
+    });
+
+    const downloadBtn = doc.createElement("a");
+    downloadBtn.href = "#";
+    downloadBtn.className = "btn-outline";
+    downloadBtn.textContent = "Download App";
+
+    nav.append(logo, navLinks, downloadBtn);
+
+    // Hero section
+    const hero = doc.createElement("div");
+    hero.className = "hero";
+
+    const heroText = doc.createElement("div");
+    heroText.className = "hero-text";
+
+    const heroPrice = doc.createElement("p");
+    heroPrice.className = "hero-price";
+    heroPrice.textContent = "Only $10.54";
+
+    const heroTitle = doc.createElement("h1");
+    heroTitle.innerHTML = "The Smokin<br>Burger";
+
+    const discountRow = doc.createElement("div");
+    discountRow.className = "discount-row";
+
+    const discountBadge = doc.createElement("div");
+    discountBadge.className = "discount-badge";
+    const pctSpan = doc.createElement("span");
+    pctSpan.className = "pct";
+    pctSpan.textContent = "15%";
+    const discLabel = doc.createElement("span");
+    discLabel.className = "disc-label";
+    discLabel.textContent = "DISCOUNT";
+    discountBadge.append(pctSpan, discLabel);
+
+    const discountText = doc.createElement("p");
+    discountText.className = "discount-text";
+    discountText.textContent = "On your first order, if you order through our App!";
+
+    discountRow.append(discountBadge, discountText);
+
+    const orderBtn = doc.createElement("a");
+    orderBtn.href = "menu.html";
+    orderBtn.className = "btn-order";
+    orderBtn.textContent = "ORDER ONLINE";
+
+    heroText.append(heroPrice, heroTitle, discountRow, orderBtn);
+
+    const heroImg = doc.createElement("div");
+    heroImg.className = "hero-img";
+    const heroImgEl = doc.createElement("img");
+    heroImgEl.src = "images/smokin-burger.png";
+    heroImgEl.alt = "The Smokin Burger";
+    heroImg.append(heroImgEl);
+
+    hero.append(heroText, heroImg);
+    header.append(nav, hero);
+
+    // Featured Grid Section
+    const featuredGrid = doc.createElement("section");
+    featuredGrid.className = "featured-grid";
+
+    const featuredItems = [
+      { badge: "white", price: "$15", img: "double-macs.png", tag: "Deal of the Day", title: "Cocacola Double macs Burger" },
+      { badge: "orange", price: "$12", img: "potato-chip-wedges.png", tag: "Indulgence Bite", title: "Crispy Fried Potato Chip Wedges" },
+      { badge: "green", price: "$10", img: "farmhouse-burger.png", tag: "Burger of the month", title: "The Farmhouse Burger" }
+    ];
+
+    const featLarge = doc.createElement("div");
+    featLarge.className = "feat-item feat-dark feat-large";
+    const badge1 = doc.createElement("div");
+    badge1.className = "feat-badge badge-white";
+    badge1.innerHTML = `<span class="only">only</span><span class="feat-price">${featuredItems[0].price}</span>`;
+    const img1 = doc.createElement("img");
+    img1.src = `images/${featuredItems[0].img}`;
+    img1.alt = featuredItems[0].title;
+    const info1 = doc.createElement("div");
+    info1.className = "feat-info";
+    info1.innerHTML = `<p class="feat-tag">${featuredItems[0].tag}</p><h3>${featuredItems[0].title}</h3><a href="menu.html" class="btn-order-sm">ORDER ONLINE</a>`;
+    featLarge.append(badge1, img1, info1);
+
+    const featRight = doc.createElement("div");
+    featRight.className = "feat-right";
+
+    [featuredItems[1], featuredItems[2]].forEach(item => {
+      const featItem = doc.createElement("div");
+      featItem.className = "feat-item feat-dark";
+      const badge = doc.createElement("div");
+      badge.className = `feat-badge badge-${item.badge}`;
+      badge.innerHTML = `<span class="only">only</span><span class="feat-price">${item.price}</span>`;
+      const img = doc.createElement("img");
+      img.src = `images/${item.img}`;
+      img.alt = item.title;
+      const info = doc.createElement("div");
+      info.className = "feat-info";
+      info.innerHTML = `<p class="feat-tag">${item.tag}</p><h3>${item.title}</h3><a href="menu.html" class="btn-order-sm">ORDER ONLINE</a>`;
+      featItem.append(badge, img, info);
+      featRight.append(featItem);
+    });
+
+    featuredGrid.append(featLarge, featRight);
+
+    // Ingredients Section
+    const ingredientsSection = doc.createElement("section");
+    ingredientsSection.className = "ingredients-section";
+
+    const ingLabel = doc.createElement("p");
+    ingLabel.className = "label-orange";
+    ingLabel.textContent = "INGREDIENTS";
+
+    const ingTitle = doc.createElement("h2");
+    ingTitle.className = "section-title white";
+    ingTitle.innerHTML = "Baked with Natural<br>Ingredients";
+
+    const ingLayout = doc.createElement("div");
+    ingLayout.className = "ingredients-layout";
+
+    const leftItems = [
+      { title: "Fresh Buns", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." },
+      { title: "Lettuce Leaf", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." },
+      { title: "Organic Onions", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." }
+    ];
+
+    const ingLeft = doc.createElement("div");
+    ingLeft.className = "ing-col ing-left";
+    leftItems.forEach(item => {
+      const ingItem = doc.createElement("div");
+      ingItem.className = "ing-item";
+      ingItem.innerHTML = `<h4>${item.title} &mdash;</h4><p>${item.text}</p>`;
+      ingLeft.append(ingItem);
+    });
+
+    const ingCenter = doc.createElement("div");
+    ingCenter.className = "ing-center";
+    const ingCenterImg = doc.createElement("img");
+    ingCenterImg.src = "images/burger-layers.png";
+    ingCenterImg.alt = "Burger Layers";
+    ingCenter.append(ingCenterImg);
+
+    const rightItems = [
+      { title: "Homemade Bacon", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." },
+      { title: "Glow Cheese", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." },
+      { title: "Quality Meat", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor." }
+    ];
+
+    const ingRight = doc.createElement("div");
+    ingRight.className = "ing-col ing-right";
+    rightItems.forEach(item => {
+      const ingItem = doc.createElement("div");
+      ingItem.className = "ing-item";
+      ingItem.innerHTML = `<h4>${item.title} &mdash;</h4><p>${item.text}</p>`;
+      ingRight.append(ingItem);
+    });
+
+    ingLayout.append(ingLeft, ingCenter, ingRight);
+    ingredientsSection.append(ingLabel, ingTitle, ingLayout);
+
+    // Menu Section
+    const menuSection = doc.createElement("section");
+    menuSection.className = "variety-section";
+
+    const menuLabel = doc.createElement("p");
+    menuLabel.className = "label-orange";
+    menuLabel.textContent = "OUR MENU";
+
+    const menuTitle = doc.createElement("h2");
+    menuTitle.className = "section-title";
+    menuTitle.textContent = "Choose and Enjoy";
+
+    const divider = doc.createElement("div");
+    divider.className = "divider";
+
+    const menuGrid = doc.createElement("div");
+    menuGrid.className = "menu-grid";
+
+    const menuItems = [
+      { img: "classic-smash.png", title: "Classic Smush", price: "$4.21", desc: "Classical smashy burger description excerpts here." },
+      { img: "chicken-burger.png", title: "Chicken Burger", price: "$3.71", desc: "Classical smashy burger description excerpts here." },
+      { img: "organic-burger.png", title: "Organic Burger", price: "$5.21", desc: "Classical smashy burger description excerpts here." },
+      { img: "classic-smash2.png", title: "Classic Smush", price: "$4.21", desc: "Classical smashy burger description goes here." },
+      { img: "chicken-burger2.png", title: "Chicken Burger", price: "$3.71", desc: "Chicken burger description goes here." },
+      { img: "organic-burger2.png", title: "Organic Burger", price: "$5.21", desc: "Organic burger description goes here." }
+    ];
+
+    menuItems.forEach(item => {
+      const menuCard = doc.createElement("div");
+      menuCard.className = "menu-card";
+      const img = doc.createElement("img");
+      img.src = `images/${item.img}`;
+      img.alt = item.title;
+      const h4 = doc.createElement("h4");
+      h4.textContent = item.title;
+      const priceP = doc.createElement("p");
+      priceP.className = "price";
+      priceP.textContent = item.price;
+      const descP = doc.createElement("p");
+      descP.className = "desc";
+      descP.textContent = item.desc;
+      const btn = doc.createElement("button");
+      btn.className = "btn-add";
+      btn.textContent = "+";
+      menuCard.append(img, h4, priceP, descP, btn);
+      menuGrid.append(menuCard);
+    });
+
+    const seeAllBtn = doc.createElement("a");
+    seeAllBtn.href = "menu.html";
+    seeAllBtn.className = "btn-see-all";
+    seeAllBtn.textContent = "See Full Menu";
+
+    menuSection.append(menuLabel, menuTitle, divider, menuGrid, seeAllBtn);
+
+    // Testimonials Section
+    const testimonialsSection = doc.createElement("section");
+    testimonialsSection.className = "testimonials-section";
+
+    const testimonialsInner = doc.createElement("div");
+    testimonialsInner.className = "testimonials-inner";
+
+    const testimonialsLeft = doc.createElement("div");
+    testimonialsLeft.className = "testimonials-left";
+
+    const quoteMark = doc.createElement("div");
+    quoteMark.className = "quote-mark";
+    quoteMark.textContent = '"';
+
+    const testLabel = doc.createElement("p");
+    testLabel.className = "label-orange";
+    testLabel.textContent = "TESTIMONIALS";
+
+    const testTitle = doc.createElement("h2");
+    testTitle.className = "section-title";
+    testTitle.textContent = "Our Customer's Say...";
+
+    const reviewMain = doc.createElement("div");
+    reviewMain.className = "review-card review-main";
+    const reviewer1 = doc.createElement("div");
+    reviewer1.className = "reviewer";
+    reviewer1.innerHTML = `<img src="images/reviewer1.png" alt="Johnmark Nanzing"><div><strong>Johnmark Nanzing</strong><span>45 Reviews</span></div>`;
+    const stars1 = doc.createElement("div");
+    stars1.className = "stars";
+    stars1.innerHTML = "&#9733;&#9733;&#9733;&#9733;&#9733;";
+    const reviewDate1 = doc.createElement("p");
+    reviewDate1.className = "review-date";
+    reviewDate1.textContent = "5 weeks ago";
+    const reviewText1 = doc.createElement("p");
+    reviewText1.className = "review-text";
+    reviewText1.textContent = "This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, and drink beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone!";
+    reviewMain.append(reviewer1, stars1, reviewDate1, reviewText1);
+    testimonialsLeft.append(quoteMark, testLabel, testTitle, reviewMain);
+
+    const testimonialsRight = doc.createElement("div");
+    testimonialsRight.className = "testimonials-right";
+    const bgImg = doc.createElement("img");
+    bgImg.src = "images/restaurant-ambience.png";
+    bgImg.alt = "Restaurant";
+    bgImg.className = "testimonial-bg-img";
+
+    const reviews = [
+      { name: "Victor Namlir", reviews: "05", text: "First time in BurgerNation and YOU have to go! Their Burgers is to die for. The service we received was so amazing and we will definitely be back again." },
+      { name: "Mary Amos", reviews: "45", text: "It's a great experience. The ambiance is very welcoming and charming. Amazing wines, food and services. The staff is very knowledgeable." }
+    ];
+
+    testimonialsRight.append(bgImg);
+    reviews.forEach((review, index) => {
+      const reviewCard = doc.createElement("div");
+      reviewCard.className = "review-card";
+      const reviewer = doc.createElement("div");
+      reviewer.className = "reviewer";
+      reviewer.innerHTML = `<img src="images/reviewer${index + 2}.png" alt="${review.name}"><div><strong>${review.name}</strong><span>${review.reviews} Reviews</span></div>`;
+      const stars = doc.createElement("div");
+      stars.className = "stars";
+      stars.innerHTML = "&#9733;&#9733;&#9733;&#9733;&#9733;";
+      const date = doc.createElement("p");
+      date.className = "review-date";
+      date.textContent = "5 weeks ago";
+      const text = doc.createElement("p");
+      text.className = "review-text";
+      text.textContent = review.text;
+      reviewCard.append(reviewer, stars, date, text);
+      testimonialsRight.append(reviewCard);
+    });
+
+    testimonialsInner.append(testimonialsLeft, testimonialsRight);
+
+    const reviewPlatforms = doc.createElement("div");
+    reviewPlatforms.className = "review-platforms";
+    reviewPlatforms.innerHTML = `<img src="images/foursquare.png" alt="Foursquare"><img src="images/tripadvisor.png" alt="TripAdvisor"><img src="images/yelp.png" alt="Yelp">`;
+
+    testimonialsSection.append(testimonialsInner, reviewPlatforms);
+
+    // Outlets Section
+    const outletsSection = doc.createElement("section");
+    outletsSection.className = "outlets-section variety-section";
+
+    const outletsLabel = doc.createElement("p");
+    outletsLabel.className = "label-orange";
+    outletsLabel.textContent = "OUR OUTLETS";
+
+    const outletsTitle = doc.createElement("h2");
+    outletsTitle.className = "section-title";
+    outletsTitle.textContent = "Find an Outlet Near You";
+
+    const outletsDivider = doc.createElement("div");
+    outletsDivider.className = "divider";
+
+    const outletsGrid = doc.createElement("div");
+    outletsGrid.className = "outlets-grid";
+
+    const outlets = [
+      { img: "outlet1.png", address: "No 4, 1st Avenue warimpa street, Abuja, Nigeria.", phone: "(+234)810 360 9491" },
+      { img: "outlet2.png", address: "No 5 Mark street, Lagos Nigeria.", phone: "(+234)810 360 9491" },
+      { img: "outlet3.png", address: "No 4, 12th Crescent wuse 2 street, Abuja, Nigeria.", phone: "(+234)810 360 9491" }
+    ];
+
+    outlets.forEach(outlet => {
+      const outletCard = doc.createElement("div");
+      outletCard.className = "outlet-card";
+      outletCard.innerHTML = `<img src="images/${outlet.img}" alt="Outlet"><p class="outlet-pin">&#128205; ${outlet.address}</p><p class="outlet-phone">${outlet.phone}</p>`;
+      outletsGrid.append(outletCard);
+    });
+
+    outletsSection.append(outletsLabel, outletsTitle, outletsDivider, outletsGrid);
+
+    // Features Bar
+    const featuresBar = doc.createElement("section");
+    featuresBar.className = "features-bar";
+
+    const features = [
+      { icon: "&#128336;", title: "On time Delivery", text: "Faster delivery in good conditions straight to you." },
+      { icon: "&#128666;", title: "Free Shipping on first Order", text: "Faster delivery in good conditions straight to you." },
+      { icon: "&#127828;", title: "Variety of Dishes", text: "Get access to our delicious special packages everyday." }
+    ];
+
+    features.forEach(feature => {
+      const featureItem = doc.createElement("div");
+      featureItem.className = "feature-item";
+      const icon = doc.createElement("div");
+      icon.className = "feature-icon";
+      icon.innerHTML = feature.icon;
+      const h4 = doc.createElement("h4");
+      h4.textContent = feature.title;
+      const p = doc.createElement("p");
+      p.textContent = feature.text;
+      featureItem.append(icon, h4, p);
+      featuresBar.append(featureItem);
+    });
+
+    // App Section
+    const appSection = doc.createElement("section");
+    appSection.className = "app-section";
+
+    const appPhones = doc.createElement("div");
+    appPhones.className = "app-phones";
+    const appImg = doc.createElement("img");
+    appImg.src = "images/app-phones.png";
+    appImg.alt = "App";
+    appPhones.append(appImg);
+
+    const appText = doc.createElement("div");
+    appText.className = "app-text";
+    const appH2 = doc.createElement("h2");
+    appH2.textContent = "Get 35% Discount";
+    const appP = doc.createElement("p");
+    appP.textContent = "Get flat 20% off on your first order through the Burger Nation App";
+    const storeBadges = doc.createElement("div");
+    storeBadges.className = "store-badges";
+    storeBadges.innerHTML = `<a href="#"><img src="images/google-play.png" alt="Google Play"></a><a href="#"><img src="images/app-store.png" alt="App Store"></a>`;
+    appText.append(appH2, appP, storeBadges);
+
+    appSection.append(appPhones, appText);
+
+    // Footer
+    const footer = doc.createElement("footer");
+    footer.className = "footer";
+
+    const footerTop = doc.createElement("div");
+    footerTop.className = "footer-top";
+
+    const footerNav = doc.createElement("nav");
+    footerNav.className = "footer-nav";
+    const footerLinks = [
+      { text: "Home", href: "index.html" },
+      { text: "Our Menu", href: "menu.html" },
+      { text: "Offers", href: "offers.html" },
+      { text: "About", href: "about.html" },
+      { text: "Franchise", href: "franchise.html" },
+      { text: "Contact", href: "contact.html" }
+    ];
+    footerLinks.forEach(link => {
+      const a = doc.createElement("a");
+      a.href = link.href;
+      a.textContent = link.text;
+      footerNav.append(a);
+    });
+
+    const footerSocial = doc.createElement("div");
+    footerSocial.className = "footer-social";
+    footerSocial.innerHTML = `<a href="#" class="soc">f</a><a href="#" class="soc">in</a><a href="#" class="soc">t</a>`;
+
+    footerTop.append(footerNav, footerSocial);
+
+    const footerBottom = doc.createElement("div");
+    footerBottom.className = "footer-bottom";
+    footerBottom.innerHTML = `<p>Copyright 2022 | All rights reserve | Created with &#10084; by Johnmark Nanzing</p><a href="#">View Outlets Near You</a>`;
+
+    footer.append(footerTop, footerBottom);
+
+    // Собираем всё вместе
+    body.append(stripes, header, featuredGrid, ingredientsSection, menuSection, testimonialsSection, outletsSection, featuresBar, appSection, footer);
+
+    html.append(head, body);
+
+    // Добавляем созданный документ на страницу
+    document.open();
+    document.write(html.outerHTML);
+    document.close();
+
+    console.log("Страница создана с помощью JavaScript DOM!");
+  </script>
+</body>
+</html>
