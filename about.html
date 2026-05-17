@@ -7,7 +7,28 @@
 <link rel="stylesheet" href="css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css">
+<style>
+  .date-picker-wrapper {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+  .date-picker-wrapper label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+  }
+  #datepicker {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+</style>
 </head>
 <body>
 
@@ -33,14 +54,18 @@
 </header>
 
 <section class="about-section">
-  <img src="images/restaurant-food-bg.png" alt="Food background" class="about-bg">
-  <div class="about-content">
-    <div class="about-divider"></div>
-    <h2>We're passionate about our food</h2>
-    <p class="about-lead">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Nulla tellus vitae gravida llamer nimcerat. Suspendisse elementum aliquam.</p>
-    <p class="about-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus et volutpat magna a faucibus ut eget. Habitant faucibus laoreet nibh amet id. Enim praesent justo aliquet eget feugiat ac. Id egestas elit metus, amet sed vestibulum. Nisl imperdiet ac blandit id sed suscipit urna. Venenatis vestibulum enim fames sit adipiscing. Cursus commodo tempor elementum eros eu non purus at mattis. Velit consectetur lobortis interdum.</p>
-  </div>
-</section>
+   <img src="images/restaurant-food-bg.png" alt="Food background" class="about-bg">
+   <div class="about-content">
+     <div class="about-divider"></div>
+     <h2>We're passionate about our food</h2>
+     <p class="about-lead">Lorem ipsum dolor sit amet, consectetur dipiscing elit. Nulla tellus vitae gravida llamer nimcerat. Suspendisse elementum aliquam.</p>
+     <p class="about-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tellus et volutpat magna a faucibus ut eget. Habitant faucibus laoreet nibh amet id. Enim praesent justo aliquet eget feugiat ac. Id egestas elit metus, amet sed vestibulum. Nisl imperdiet ac blandit id sed suscipit urna. Venenatis vestibulum enim fames sit adipiscing. Cursus commodo tempor elementum eros eu non purus at mattis. Velit consectetur lobortis interdum.</p>
+   </div>
+   <div class="date-picker-wrapper">
+     <label for="datepicker">Выберите дату для посещения:</label>
+     <input type="text" id="datepicker" placeholder="Выберите дату">
+   </div>
+ </section>
 
 <div id="accordion">
    <h3><span class="feature-icon-circle">&#128336;</span> On time Delivery</h3>
@@ -100,6 +125,10 @@
     $("#accordion").accordion({
       collapsible: true,
       active: false
+    });
+    $("#datepicker").datepicker({
+      dateFormat: "dd.mm.yy",
+      minDate: 0
     });
   });
 </script>
