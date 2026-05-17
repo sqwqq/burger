@@ -6,6 +6,8 @@
 <title>BurgerNation - About</title>
 <link rel="stylesheet" href="css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/ui-lightness/jquery-ui.css">
 </head>
 <body>
 
@@ -40,23 +42,20 @@
   </div>
 </section>
 
-<section class="features-bar features-bar-white">
-  <div class="feature-item feature-item-dark">
-    <div class="feature-icon-circle">&#128336;</div>
-    <h4>On time Delivery</h4>
-    <p>Faster delivery in good conditions straight to you</p>
-  </div>
-  <div class="feature-item feature-item-dark">
-    <div class="feature-icon-circle">&#128666;</div>
-    <h4>Free Shipping on first Order</h4>
-    <p>Faster delivery in good conditions straight to you</p>
-  </div>
-  <div class="feature-item feature-item-dark">
-    <div class="feature-icon-circle">&#127828;</div>
-    <h4>Variety of Dishes</h4>
-    <p>Get access to our delicious special packages everyday</p>
-  </div>
-</section>
+<div id="accordion">
+   <h3><span class="feature-icon-circle">&#128336;</span> On time Delivery</h3>
+   <div>
+     <p>Faster delivery in good conditions straight to you</p>
+   </div>
+   <h3><span class="feature-icon-circle">&#128666;</span> Free Shipping on first Order</h3>
+   <div>
+     <p>Faster delivery in good conditions straight to you</p>
+   </div>
+   <h3><span class="feature-icon-circle">&#127828;</span> Variety of Dishes</h3>
+   <div>
+     <p>Get access to our delicious special packages everyday</p>
+   </div>
+ </div>
 
 <section class="app-section">
   <div class="app-phones">
@@ -94,5 +93,15 @@
   </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script>
+  $(function() {
+    $("#accordion").accordion({
+      collapsible: true,
+      active: false
+    });
+  });
+</script>
 </body>
 </html>
