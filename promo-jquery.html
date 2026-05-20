@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BurgerNation - Promotions</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function() {
+      $('body').append('<div class="stripes"></div>');
+
+      const header = $('<header>').addClass('header header-menu');
+
+      const nav = $('<nav>').addClass('navbar');
+
+      const logo = $('<a>').attr('href', 'index.html').addClass('logo').html('&#9776; BurgerNation');
+
+      const navLinks = $('<ul>').addClass('nav-links');
+      const menuItems = [
+        { text: 'Home', href: 'index.html' },
+        { text: 'Our Menu', href: 'menu.html' },
+        { text: 'Offers', href: 'offers.html' },
+        { text: 'About', href: 'about.html' },
+        { text: 'Franchise', href: 'franchise.html' },
+        { text: 'Contact', href: 'contact.html' }
+      ];
+      $.each(menuItems, function(i, item) {
+        const li = $('<li>');
+        const a = $('<a>').attr('href', item.href).text(item.text);
+        if (item.href === 'offers.html') a.addClass('active');
+        li.append(a);
+        navLinks.append(li);
+      });
+
+      const downloadBtn = $('<a>').attr('href', '#').addClass('btn-outline').text('Download App');
+
+      nav.append(logo, navLinks, downloadBtn);
+
+      const heroMenu = $('<div>').addClass('hero-menu');
+      heroMenu.append('<p class="hero-sub">Check out our</p>');
+      heroMenu.append('<h1>PROMOTIONS</h1>');
+
+      header.append(nav, heroMenu);
+
+      const offersSection = $('<section>').addClass('offers-grid');
+
+      const promoData = [
+        { badge: 'white', price: '$15', img: 'double-macs.png', tag: 'Deal of the Day', title: 'Cocacola Double macs Burger' },
+        { badge: 'orange', price: '$12', img: 'potato-chip-wedges.png', tag: 'Indulgence Bite', title: 'Crispy Fried Potato Chip Wedges' },
+        { badge: 'green', price: '$10', img: 'farmhouse-burger.png', tag: 'Burger of the month', title: 'The Farmhouse Burger' },
+        { badge: 'orange', price: '$17', img: 'potato-chip-wedges.png', tag: 'Indulgence Bite', title: 'Crispy Fried Potato Chip Wedges' },
+        { badge: 'green', price: '$12', img: 'farmhouse-burger.png', tag: 'Burger of the month', title: 'The Farmhouse Burger' },
+        { badge: 'white', price: '$14', img: 'black-burger.png', tag: 'Deal of the Day', title: 'Quinoa & Black Bean Burger' }
+      ];
+
+      $.each(promoData, function(i, promo) {
+        const featItem = $('<div>').addClass('feat-item feat-dark');
+
+        const badge = $('<div>').addClass('feat-badge badge-' + promo.badge);
+        badge.append('<span class="only">only</span>');
+        badge.append('<span class="feat-price">' + promo.price + '</span>');
+
+        const img = $('<img>').attr('src', 'images/' + promo.img).attr('alt', promo.title);
+
+        const info = $('<div>').addClass('feat-info');
+        info.append('<p class="feat-tag">' + promo.tag + '</p>');
+        info.append('<h3>' + promo.title + '</h3>');
+        info.append('<a href="menu.html" class="btn-order-sm">ORDER ONLINE</a>');
+
+        featItem.append(badge, img, info);
+        offersSection.append(featItem);
+      });
+
+      const appSection = $('<section>').addClass('app-section');
+
+      const appPhones = $('<div>').addClass('app-phones');
+      appPhones.append('<img src="images/app-phones.png" alt="App">');
+
+      const appText = $('<div>').addClass('app-text');
+      appText.append('<h2>Get 35% Discount</h2>');
+      appText.append('<p>Get flat 20% off on your first order through the Burger Nation App</p>');
+
+      const storeBadges = $('<div>').addClass('store-badges');
+      storeBadges.append('<a href="#"><img src="images/google-play.png" alt="Google Play"></a>');
+      storeBadges.append('<a href="#"><img src="images/app-store.png" alt="App Store"></a>');
+
+      appText.append(storeBadges);
+      appSection.append(appPhones, appText);
+
+      const footer = $('<footer>').addClass('footer');
+
+      const footerTop = $('<div>').addClass('footer-top');
+
+      const footerNav = $('<nav>').addClass('footer-nav');
+      $.each(menuItems, function(i, item) {
+        footerNav.append('<a href="' + item.href + '">' + item.text + '</a>');
+      });
+
+      const footerSocial = $('<div>').addClass('footer-social');
+      footerSocial.append('<a href="#" class="soc">f</a>');
+      footerSocial.append('<a href="#" class="soc">in</a>');
+      footerSocial.append('<a href="#" class="soc">t</a>');
+
+      footerTop.append(footerNav, footerSocial);
+
+      const footerBottom = $('<div>').addClass('footer-bottom');
+      footerBottom.append('<p>Copyright 2022 | All rights reserve | Created with &#10084; by Johnmark Nanzing</p>');
+      footerBottom.append('<a href="#">View Outlets Near You</a>');
+
+      footer.append(footerTop, footerBottom);
+
+      $('body').append(header, offersSection, appSection, footer);
+    });
+  </script>
+</body>
+</html>
