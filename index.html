@@ -74,6 +74,69 @@
     border-radius: 8px;
     object-fit: cover;
   }
+  .navbar.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(20, 82, 20, 0.95);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    padding: 10px 40px;
+    transition: all 0.3s ease;
+  }
+  .countdown-section {
+    background: linear-gradient(160deg, #145214 0%, #1a6b1a 60%, #2d8a2d 100%);
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 18px, transparent 18px, transparent 60px);
+  }
+  .countdown-section h2 {
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .countdown-section p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+  }
+  #countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .countdown-item {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 80px;
+  }
+  .countdown-item .number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    display: block;
+  }
+  .countdown-item .label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+  }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -385,14 +448,37 @@
  <section class="gallery">
    <h2>Наша Галерея</h2>
    <div class="gallery-grid">
-     <img src="images/smokin-burger.png" alt="The Smokin Burger">
-     <img src="images/double-macs.png" alt="Cocacola Double macs Burger">
-     <img src="images/potato-chip-wedges.png" alt="Crispy Fried Potato Chip Wedges">
-     <img src="images/farmhouse-burger.png" alt="The Farmhouse Burger">
-     <img src="images/chicken-burger.png" alt="Chicken Burger">
-     <img src="images/organic-burger.png" alt="Organic Burger">
-     <img src="images/app-phones.png" alt="App">
-     <img src="images/restaurant-ambience.png" alt="Restaurant Ambience">
+     <img data-src="images/smokin-burger.png" alt="The Smokin Burger" class="lazyload">
+     <img data-src="images/double-macs.png" alt="Cocacola Double macs Burger" class="lazyload">
+     <img data-src="images/potato-chip-wedges.png" alt="Crispy Fried Potato Chip Wedges" class="lazyload">
+     <img data-src="images/farmhouse-burger.png" alt="The Farmhouse Burger" class="lazyload">
+     <img data-src="images/chicken-burger.png" alt="Chicken Burger" class="lazyload">
+     <img data-src="images/organic-burger.png" alt="Organic Burger" class="lazyload">
+     <img data-src="images/app-phones.png" alt="App" class="lazyload">
+     <img data-src="images/restaurant-ambience.png" alt="Restaurant Ambience" class="lazyload">
+   </div>
+ </section>
+
+ <section class="countdown-section">
+   <h2>Специальное предложение!</h2>
+   <p>Скидка 20% на все бургеры до конца акции:</p>
+   <div id="countdown">
+     <div class="countdown-item">
+       <span class="number" id="days">00</span>
+       <span class="label">Дней</span>
+     </div>
+     <div class="countdown-item">
+       <span class="number" id="hours">00</span>
+       <span class="label">Часов</span>
+     </div>
+     <div class="countdown-item">
+       <span class="number" id="minutes">00</span>
+       <span class="label">Минут</span>
+     </div>
+     <div class="countdown-item">
+       <span class="number" id="seconds">00</span>
+       <span class="label">Секунд</span>
+     </div>
    </div>
  </section>
 
@@ -428,11 +514,47 @@
      // Auto slide every 5 seconds
      setInterval(nextSlide, 5000);
 
-     // Manual navigation
-     dots.click(function() {
-       currentSlide = $(this).index();
-       showSlide(currentSlide);
-     });
+      // Manual navigation
+      dots.click(function() {
+        currentSlide = $(this).index();
+        showSlide(currentSlide);
+      });
+
+      // Floating menu on scroll
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+          $('.navbar').addClass('fixed');
+        } else {
+          $('.navbar').removeClass('fixed');
+        }
+      });
+
+      // Countdown timer
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 7);
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = endDate - now;
+
+        if (diff <= 0) {
+          $('#countdown').html('<p>Акция завершена!</p>');
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        $('#days').text(days.toString().padStart(2, '0'));
+        $('#hours').text(hours.toString().padStart(2, '0'));
+        $('#minutes').text(minutes.toString().padStart(2, '0'));
+        $('#seconds').text(seconds.toString().padStart(2, '0'));
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     });
   </script>
 
