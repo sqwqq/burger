@@ -114,6 +114,38 @@
       footer.append(footerTop, footerBottom);
 
       $('body').append(header, offersSection, appSection, footer);
+
+      // .click() — обработка клика по кнопкам "ORDER ONLINE"
+      $('.btn-order-sm').click(function(e) {
+        e.preventDefault();
+        const title = $(this).siblings('h3').text();
+        alert('Вы выбрали: ' + title);
+      });
+
+      // .hover() — эффект при наведении на карточки
+      $('.feat-item').hover(
+        function() {
+          $(this).css('transform', 'scale(1.03)');
+          $(this).css('transition', 'transform 0.3s ease');
+        },
+        function() {
+          $(this).css('transform', 'scale(1)');
+        }
+      );
+
+      // .on() — делегирование событий для навигации
+      $('body').on('click', '.nav-links a, .footer-nav a', function(e) {
+        const href = $(this).attr('href');
+        if (href !== '#' && !href.startsWith('menu.html')) {
+          console.log('Переход на: ' + href);
+        }
+      });
+
+      // .bind() — обработка клика по кнопке "Download App"
+      $('.btn-outline').bind('click', function(e) {
+        e.preventDefault();
+        alert('Скоро доступно!');
+      });
     });
   </script>
 </body>
