@@ -28,6 +28,53 @@
     font-size: 16px;
     box-sizing: border-box;
   }
+  .accordion-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  .accordion-section .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #1a1a1a;
+  }
+  #accordion {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #accordion h3 {
+    background: #f8f8f8;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+  }
+  #accordion h3:hover {
+    background: #f0f0f0;
+  }
+  #accordion h3.ui-accordion-header-active {
+    background: #1a6b1a;
+    color: #fff;
+    border-bottom-color: #145214;
+  }
+  #accordion div.ui-accordion-content {
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  #accordion div.ui-accordion-content p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+  #accordion h3:last-of-type,
+  #accordion div.ui-accordion-content:last-of-type {
+    border-bottom: none;
+  }
 </style>
 </head>
 <body>
@@ -67,20 +114,23 @@
    </div>
  </section>
 
-<div id="accordion">
-   <h3><span class="feature-icon-circle">&#128336;</span> On time Delivery</h3>
-   <div>
-     <p>Faster delivery in good conditions straight to you</p>
+<section class="accordion-section">
+   <h2 class="section-title" style="text-align:center; margin-bottom:30px;">Наши преимущества</h2>
+   <div id="accordion">
+     <h3>On time Delivery</h3>
+     <div>
+       <p>Faster delivery in good conditions straight to you. We ensure your order arrives fresh and on time, every time.</p>
+     </div>
+     <h3>Free Shipping on first Order</h3>
+     <div>
+       <p>Enjoy free shipping on your very first order. No minimum purchase required. Start your BurgerNation experience today!</p>
+     </div>
+     <h3>Variety of Dishes</h3>
+     <div>
+       <p>Get access to our delicious special packages everyday. From classic burgers to unique sides, there's something for everyone.</p>
+     </div>
    </div>
-   <h3><span class="feature-icon-circle">&#128666;</span> Free Shipping on first Order</h3>
-   <div>
-     <p>Faster delivery in good conditions straight to you</p>
-   </div>
-   <h3><span class="feature-icon-circle">&#127828;</span> Variety of Dishes</h3>
-   <div>
-     <p>Get access to our delicious special packages everyday</p>
-   </div>
- </div>
+ </section>
 
 <section class="app-section">
   <div class="app-phones">
@@ -124,7 +174,9 @@
   $(function() {
     $("#accordion").accordion({
       collapsible: true,
-      active: false
+      active: false,
+      heightStyle: "content",
+      animate: 300
     });
     $("#datepicker").datepicker({
       dateFormat: "dd.mm.yy",
