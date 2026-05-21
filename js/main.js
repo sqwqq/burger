@@ -5,6 +5,22 @@ $(document).ready(function() {
     } else {
       $('.navbar').removeClass('fixed');
     }
+
+    $('.animate-on-scroll').each(function() {
+      const elementTop = $(this).offset().top;
+      const windowBottom = $(window).scrollTop() + $(window).height();
+      if (elementTop < windowBottom - 50) {
+        $(this).addClass('visible');
+      }
+    });
+  });
+
+  $('.animate-on-scroll').each(function() {
+    const elementTop = $(this).offset().top;
+    const windowBottom = $(window).scrollTop() + $(window).height();
+    if (elementTop < windowBottom - 50) {
+      $(this).addClass('visible');
+    }
   });
 
   if ($('.slider').length) {
