@@ -472,70 +472,34 @@
  </section>
 
  <script>
-   $(document).ready(function() {
-     // Slider functionality
-     let currentSlide = 0;
-     const slides = $('.slide');
-     const totalSlides = slides.length;
-     const sliderNav = $('.slider-nav');
+    $(document).ready(function() {
+      // Countdown timer
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 7);
 
-     // Create navigation dots
-     for (let i = 0; i < totalSlides; i++) {
-       const dot = $('<div>');
-       if (i === 0) dot.addClass('active');
-       sliderNav.append(dot);
-     }
+      function updateCountdown() {
+        const now = new Date();
+        const diff = endDate - now;
 
-     const dots = $('.slider-nav div');
+        if (diff <= 0) {
+          $('#countdown').html('<p>Акция завершена!</p>');
+          return;
+        }
 
-     function showSlide(index) {
-       slides.removeClass('active');
-       dots.removeClass('active');
-       slides.eq(index).addClass('active');
-       dots.eq(index).addClass('active');
-     }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-     function nextSlide() {
-       currentSlide = (currentSlide + 1) % totalSlides;
-       showSlide(currentSlide);
-     }
+        $('#days').text(days.toString().padStart(2, '0'));
+        $('#hours').text(hours.toString().padStart(2, '0'));
+        $('#minutes').text(minutes.toString().padStart(2, '0'));
+        $('#seconds').text(seconds.toString().padStart(2, '0'));
+      }
 
-     // Auto slide every 5 seconds
-     setInterval(nextSlide, 5000);
-
-       // Manual navigation
-       dots.click(function() {
-         currentSlide = $(this).index();
-         showSlide(currentSlide);
-       });
-
-       // Countdown timer
-       const endDate = new Date();
-       endDate.setDate(endDate.getDate() + 7);
-
-       function updateCountdown() {
-         const now = new Date();
-         const diff = endDate - now;
-
-         if (diff <= 0) {
-           $('#countdown').html('<p>Акция завершена!</p>');
-           return;
-         }
-
-         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-         $('#days').text(days.toString().padStart(2, '0'));
-         $('#hours').text(hours.toString().padStart(2, '0'));
-         $('#minutes').text(minutes.toString().padStart(2, '0'));
-         $('#seconds').text(seconds.toString().padStart(2, '0'));
-       }
-
-       updateCountdown();
-       setInterval(updateCountdown, 1000);
-     });
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
    </script>
 
    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
